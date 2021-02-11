@@ -1,6 +1,6 @@
 <?php
     require_once('../config/connect.php');
-    if(isset($_FILES['image'])){
+    if (isset($_FILES['image'])) {
         $errors= array();
         $file_name = $_FILES['image']['name'];
         $file_size = $_FILES['image']['size'];
@@ -10,7 +10,7 @@
         
         $extensions= array("jpeg","jpg","png");
         
-        if(in_array($file_ext,$extensions)=== false){
+        if (in_array($file_ext,$extensions)=== false) {
            $errors[]="extension not allowed, please choose a JPEG or PNG file.";
         }
         
@@ -18,11 +18,10 @@
         //    $errors[]='File size must be excately 2 MB';
         // }
         
-        if(empty($errors)==true){
+        if (empty($errors) == true) {
             //upload for the file.
             move_uploaded_file($file_tmp,$_SERVER['DOCUMENT_ROOT']."/simple-image-upload-php/assets/upload/".$file_name);
 
-            echo "Success";
             // Formuleer query
             $sql = "INSERT INTO `fotoalbums` (`foto`) VALUES ('{$file_name}')";
             // Poging uitvoeren query
@@ -36,9 +35,7 @@
             // Afsluiten verbinding
             $conn->close();
 
-
-
-        }else{
+        } else {
            print_r($errors);
         }
     }
